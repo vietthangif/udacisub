@@ -4,14 +4,14 @@
 const program = require('commander');
 const path = require('path');
 const fs = require('fs');
-const jsdom = require("jsdom");
+const jsdom = require('jsdom');
 const {JSDOM} = jsdom;
 
 let main = (directory) => {
-    let htmlFiles = scanDir(directory, ".html");
-    if (htmlFiles.length > 0) {
-        attach(htmlFiles[0]);
-    }
+    let htmlFiles = scanDir(directory, '.html');
+    htmlFiles.forEach(htmlFile => {
+        attachTrack(htmlFile);
+    })
 };
 
 /**
@@ -46,9 +46,9 @@ let scanDir = (startPath, filter) => {
  * Attach track to each video tag
  *
  * @param file
- * @return string
  */
-let attach = (file) => {
+let attachTrack = (file) => {
+    console.log('Processing %s', file);
     JSDOM.fromFile(file).then(dom => {
         const vidSrcSelectors = dom.window.document.querySelectorAll('source');
         vidSrcSelectors.forEach(vidSrcSelector => {
@@ -60,9 +60,9 @@ let attach = (file) => {
 
         fs.writeFile(file, dom.serialize(), function (err) {
             if (err) {
-                return console.log(err);
+                return console.error(err);
             }
-            console.log("The file was saved!")
+            console.log('Process finish %s', file);
         })
     });
 };
