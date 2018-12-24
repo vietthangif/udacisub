@@ -1,0 +1,21 @@
+{
+  "name": "udacisub",
+  "version": "1.0.0",
+  "description": "m",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "udacity",
+    "subtitles"
+  ],
+  "author": "vietthangif",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.19.0",
+    "jquery": "^3.3.1",
+    "jsdom": "^13.1.0"
+  },
+  "preferGlobal": true
+}
